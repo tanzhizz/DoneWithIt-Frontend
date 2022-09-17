@@ -1,0 +1,71 @@
+import React, { useState } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import ListItem from "../components/lists/ListItem";
+import ListItemSeparator from "../components/lists/ListItemSeparator";
+
+import Screen from "../components/Screen";
+import ListItemDeleteAction from "../components/lists/ListItemDeleteAction";
+
+const initialMessages = [
+  {
+    id: 1,
+    title:
+      "Your CSS rule is saying “find all article elements that are a first child, and set their color property to blue”. Well, your article element is a first child, so its color property, and all of the elements within it, are set to blue. So you just need a slight adjustment to your CSS in order to select the right type of element.",
+    description:
+      "Your CSS rule is saying “find all article elements that are a first child, and set their color property to blue”. Well, your article element is a first child, so its color property, and all of the elements within it, are set to blue. So you just need a slight adjustment to your CSS in order to select the right type of element.",
+    image: require("../assets/face.jpg"),
+  },
+  {
+    id: 2,
+    title:
+      "Your CSS rule is saying “find all article elements that are a first child, and set their color property to blue”. Well, your article element is a first child, so its color property, and all of the elements within it, are set to blue. So you just need a slight adjustment to your CSS in order to select the right type of element.",
+    description:
+      "Your CSS rule is saying “find all article elements that are a first child, and set their color property to blue”. Well, your article element is a first child, so its color property, and all of the elements within it, are set to blue. So you just need a slight adjustment to your CSS in order to select the right type of element.",
+    image: require("../assets/face.jpg"),
+  },
+];
+
+function MessageScreen(props) {
+  const [messages, setMessages] = useState(initialMessages);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleDelete = (message) => {
+    //Delete the message from messages
+    setMessages(messages.filter((m) => m.id !== message.id));
+  };
+
+  return (
+    <Screen>
+      <FlatList
+        data={messages}
+        keyExtractor={(message) => message.id.toString()}
+        renderItem={({ item }) => (
+          <ListItem
+            title={item.title}
+            subTitle={item.description}
+            image={item.image}
+            onPress={() => console.log("Message selected", item)}
+            renderRightActions={() => (
+              <ListItemDeleteAction onPress={() => handleDelete(item)} />
+            )}
+          />
+        )}
+        ItemSeparatorComponent={ListItemSeparator}
+        refreshing={refreshing}
+        onRefresh={() => {
+          setMessages([
+            {
+              id: 2,
+              title: "T2",
+              description: "D2",
+              image: require("../assets/face.jpg"),
+            },
+          ]);
+        }}
+      />
+    </Screen>
+  );
+}
+
+const styles = StyleSheet.create({});
+export default MessageScreen;

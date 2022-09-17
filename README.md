@@ -1,2 +1,1 @@
-# DoneWithIt-Frontend
-DoneWithIt Frontend
+# DoneWithIt
