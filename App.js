@@ -1,7 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { useState, useEffect, useCallback } from "react";
-import jwtDecode from "jwt-decode";
 import AppLoading from "expo-app-loading";
 import * as SplashScreen from "expo-splash-screen";
 
@@ -55,18 +54,16 @@ export default function App() {
 
   const [IsReady, setIsReady] = useState(false);
 
-  const restoreToken = async () => {
-    const token = await authStorage.getToken();
-    if (!token) return;
-
-    setUser(jwtDecode(token));
+  const restoreUser = async () => {
+    const user = await authStorage.getUser();
+    if (user) setUser(user);
   };
 
   useEffect(() => {
     async function prepare() {
       try {
         await SplashScreen.preventAutoHideAsync();
-        await restoreToken();
+        await restoreUser();
       } catch (e) {
         console.warn(e);
       } finally {
