@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AppLoading from "expo-app-loading";
 import * as SplashScreen from "expo-splash-screen";
 
@@ -87,7 +87,7 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      <OfflineNotice />
+      {/* <OfflineNotice /> */}
       <NavigationContainer theme={navigationTheme} onReady={onLayoutRootView}>
         {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
