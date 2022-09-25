@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     backgroundColor: colors.primary,
-    elevation: Platform.OS === "android" ? 1 : 0,
     height: 50,
     justifyContent: "center",
     position: "absolute",

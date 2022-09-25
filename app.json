@@ -39,7 +39,8 @@
           "sounds": [
             "./local/assets/notification-sound.wav",
             "./local/assets/notification-sound-other.wav"
-          ]
+          ],
+          "iosDisplayInForeground": true
         }
       ]
     ]
