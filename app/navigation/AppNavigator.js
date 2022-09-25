@@ -16,6 +16,7 @@ import navigation from "./rootNavigation";
 import routes from "./routes";
 import useNotifications from "../hooks/useNotifications";
 
+
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {

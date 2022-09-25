@@ -43,7 +43,19 @@
           "iosDisplayInForeground": true
         }
       ]
-    ]
-  
+    ],
+    "extra": {
+      "bugsnag": {
+        "apiKey": "af4785477309106c239605daac774222"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
+    }
   }
 }

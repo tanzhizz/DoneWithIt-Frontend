@@ -10,14 +10,29 @@ import Screen from "../components/Screen";
 import AppText from "../components/AppText";
 import ActivityIndicator from "../components/ActivityIndicator";
 import useApi from "../hooks/useApi";
+import useAuth from "../auth/useAuth";
+import ListItemDeleteAction from "../components/lists/ListItemDeleteAction";
 
+function ListingsUserScreen({ navigation }) {
+  const [products, setProducts] = useState(userListings);
+  const [refreshing, setRefreshing] = useState(false);
 
-function ListingsScreen({ navigation }) {
   const getListingsApi = useApi(listingsApi.getListings);
 
   useEffect(() => {
     getListingsApi.request();
   }, []);
+
+  const { user } = useAuth();
+
+  const userListings = getListingsApi.data.filter(
+    (d) => d.userId == user.userId
+  );
+
+  const handleDelete = (product) => {
+    //Delete the message from messages
+    setProducts(userListings.filter((p) => p.id !== product.id));
+  };
 
   return (
     <>
@@ -30,7 +45,7 @@ function ListingsScreen({ navigation }) {
           </>
         )}
         <FlatList
-          data={getListingsApi.data}
+          data={userListings}
           keyExtractor={(listing) => listing.id.toString()}
           renderItem={({ item }) => (
             <Card
@@ -53,4 +68,4 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
   },
 });
-export default ListingsScreen;
+export default ListingsUserScreen;

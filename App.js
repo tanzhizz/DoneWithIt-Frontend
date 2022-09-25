@@ -11,6 +11,7 @@ import AuthNavigator from "./app/navigation/AuthNavigator";
 import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/storage";
 import { navigationRef } from "./app/navigation/rootNavigation";
+import logger from "./app/utility/logger";
 
 // export default function App() {
 //   const [user, setUser] = useState();
@@ -48,6 +49,8 @@ import { navigationRef } from "./app/navigation/rootNavigation";
 // }
 
 //Another way of using SplashScreen,have some errors
+
+logger.start();
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
